@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Georgetown University Choir — Concert Choir &amp; Chamber Singers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Official Georgetown University Color Palette */
+    --gu-blue: #041E42;          /* Primary — Georgetown Blue (PMS 282) */
+    --gu-blue-secondary: #003DA5; /* Secondary Blue (PMS 293) */
+    --gu-gray: #8D817B;          /* Primary — Georgetown Gray (PMS 409) */
+    --gu-cool-gray: #BBBCBC;    /* Cool Gray 4 */
+    --gu-warm-gray: #D6D2C4;    /* Warm Gray (PMS 7527) */
+
+    /* Extended palette */
+    --white: #FFFFFF;
+    --off-white: #F8F7F5;
+    --light-gray: #EEEDEA;
+    --text-primary: #1A1A1A;
+    --text-secondary: #4A4A4A;
+    --text-light: #6E6E6E;
+    --border-light: #E2E0DC;
+
+    /* Georgetown Fonts */
+    --caslon: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
+    --sans: 'Source Sans 3', Helvetica, Arial, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    color: var(--text-primary);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: var(--gu-blue);
+  }
+
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 64px;
+  }
+
+  .nav-logo {
+    font-family: var(--caslon);
+    font-size: 1rem; font-weight: 400;
+    color: var(--white);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 12px;
+    letter-spacing: 0.01em;
+  }
+
+  .nav-logo .gu-mark {
+    font-family: var(--caslon);
+    font-weight: 700; font-size: 0.72rem;
+    color: var(--white);
+    border: 1.5px solid rgba(255,255,255,0.4);
+    width: 32px; height: 32px;
+    display: grid; place-items: center;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+
+  .nav-links { display: flex; gap: 0; align-items: center; height: 100%; }
+
+  .nav-item {
+    position: relative;
+    height: 100%; display: flex; align-items: center;
+  }
+
+  .nav-item > a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-family: var(--sans);
+    font-size: 0.82rem; font-weight: 400;
+    letter-spacing: 0.01em;
+    padding: 0 16px; height: 100%;
+    display: flex; align-items: center;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .nav-item > a:hover {
+    color: var(--white);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .nav-item.has-dropdown > a::after {
+    content: ''; margin-left: 6px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid rgba(255,255,255,0.4);
+  }
+
+  .dropdown {
+    position: absolute; top: 100%; left: 0;
+    background: var(--white);
+    min-width: 240px;
+    opacity: 0; visibility: hidden;
+    transform: translateY(-2px);
+    transition: all 0.2s ease;
+    box-shadow: 0 8px 32px rgba(4,30,66,0.15);
+    border-top: 3px solid var(--gu-blue-secondary);
+  }
+
+  .nav-item:hover .dropdown {
+    opacity: 1; visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown a {
+    display: block;
+    padding: 12px 20px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem; font-weight: 400;
+    border-bottom: 1px solid var(--light-gray);
+    transition: all 0.15s;
+  }
+
+  .dropdown a:last-child { border-bottom: none; }
+
+  .dropdown a:hover {
+    color: var(--gu-blue-secondary);
+    background: var(--off-white);
+    padding-left: 24px;
+  }
+
+  .nav-donate-btn {
+    background: var(--white) !important;
+    color: var(--gu-blue) !important;
+    font-weight: 600 !important;
+    padding: 0 20px !important;
+    margin-left: 12px;
+    font-size: 0.8rem !important;
+    border-radius: 2px;
+    height: 36px !important;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-donate-btn:hover {
+    background: var(--gu-warm-gray) !important;
+  }
+
+  .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: none; border: none; padding: 8px; }
+  .hamburger span { display: block; width: 20px; height: 1.5px; background: rgba(255,255,255,0.8); transition: 0.3s; }
+
+  .mobile-menu {
+    display: none; position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+    background: var(--white); padding: 0; overflow-y: auto; z-index: 999;
+  }
+  .mobile-menu.open { display: block; }
+  .mobile-menu a {
+    display: block; color: var(--text-secondary);
+    text-decoration: none; padding: 16px 24px; font-size: 0.95rem;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  .mobile-menu a:hover { color: var(--gu-blue-secondary); background: var(--off-white); }
+  .mobile-menu .mobile-section {
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gu-gray); padding: 20px 24px 8px; border-bottom: none;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--gu-blue);
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(0,61,165,0.12) 0%, transparent 60%),
+      linear-gradient(180deg, #041E42 0%, #05264F 100%);
+  }
+
+  /* Subtle pattern reminiscent of architectural detail */
+  .hero-pattern {
+    position: absolute; inset: 0; opacity: 0.025;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(255,255,255,0.3) 80px, rgba(255,255,255,0.3) 81px),
+      repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,255,255,0.3) 80px, rgba(255,255,255,0.3) 81px);
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; padding: 0 32px;
+    animation: fadeUp 0.8s ease-out;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-crest {
+    width: 80px; height: 80px;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    border-radius: 2px;
+    display: grid; place-items: center;
+    margin: 0 auto 32px;
+    font-family: var(--caslon);
+    font-size: 1.3rem; font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.05em;
+  }
+
+  .hero-university {
+    font-family: var(--sans);
+    font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 16px;
+  }
+
+  .hero h1 {
+    font-family: var(--caslon);
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    font-weight: 400; line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .hero-sub {
+    font-family: var(--caslon);
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-weight: 400; font-style: italic;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 8px;
+  }
+
+  .hero-dept {
+    font-family: var(--sans);
+    font-size: 0.82rem; font-weight: 300;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 40px;
+  }
+
+  .hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-block; padding: 12px 28px;
+    font-family: var(--sans);
+    font-size: 0.82rem; font-weight: 500;
+    letter-spacing: 0.02em;
+    text-decoration: none; border-radius: 2px;
+    transition: all 0.25s; cursor: pointer; border: none;
+  }
+
+  .btn-white { background: var(--white); color: var(--gu-blue); }
+  .btn-white:hover { background: var(--gu-warm-gray); }
+
+  .btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.3); }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); }
+
+  .btn-blue { background: var(--gu-blue); color: var(--white); }
+  .btn-blue:hover { background: var(--gu-blue-secondary); }
+
+  .btn-blue-outline { background: transparent; color: var(--gu-blue); border: 1px solid var(--gu-blue); }
+  .btn-blue-outline:hover { background: var(--gu-blue); color: var(--white); }
+
+  /* ── THIN ACCENT BAR ── */
+  .accent-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--gu-blue) 0%, var(--gu-blue-secondary) 50%, var(--gu-gray) 100%);
+  }
+
+  /* ── WELCOME ── */
+  .welcome {
+    display: grid; grid-template-columns: 240px 1fr;
+    gap: 56px; align-items: start;
+    max-width: 960px; margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  .welcome-photo {
+    width: 220px; height: 280px;
+    background: var(--light-gray);
+    border-radius: 2px; position: relative; overflow: hidden;
+    border: 1px solid var(--border-light);
+  }
+
+  .welcome-photo .placeholder {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 4px;
+    color: var(--gu-gray); font-size: 0.72rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  .welcome-body {
+    padding-top: 8px;
+  }
+
+  .welcome-body .greeting {
+    font-family: var(--caslon);
+    font-size: 1.5rem; font-weight: 400;
+    color: var(--gu-blue);
+    margin-bottom: 20px;
+  }
+
+  .welcome-body p {
+    font-family: var(--sans);
+    font-size: 0.95rem; line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+
+  .welcome-sig {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-light);
+  }
+
+  .welcome-sig .name {
+    font-family: var(--caslon);
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--gu-blue);
+  }
+
+  .welcome-sig .title {
+    font-family: var(--sans);
+    font-size: 0.82rem; color: var(--gu-gray);
+    margin-top: 2px;
+  }
+
+  /* ── ENSEMBLES ── */
+  .ensembles {
+    background: var(--off-white);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+    padding: 80px 40px;
+  }
+
+  .ensembles-inner { max-width: 1040px; margin: 0 auto; }
+
+  .ensembles-header { text-align: center; margin-bottom: 48px; }
+
+  .label {
+    font-family: var(--sans);
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gu-gray);
+    margin-bottom: 10px;
+  }
+
+  .heading {
+    font-family: var(--caslon);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 400; color: var(--gu-blue);
+  }
+
+  .ensembles-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  .ensemble-card {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: 3px; padding: 40px 36px;
+    transition: box-shadow 0.3s;
+  }
+
+  .ensemble-card:hover {
+    box-shadow: 0 8px 32px rgba(4,30,66,0.06);
+  }
+
+  .ensemble-card .card-label {
+    font-family: var(--sans);
+    font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gu-blue-secondary);
+    margin-bottom: 8px;
+  }
+
+  .ensemble-card h3 {
+    font-family: var(--caslon);
+    font-size: 1.4rem; font-weight: 400;
+    color: var(--gu-blue);
+    margin-bottom: 16px;
+  }
+
+  .ensemble-card p {
+    font-size: 0.9rem; line-height: 1.75;
+    color: var(--text-secondary);
+  }
+
+  .ensemble-tags {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-top: 20px; padding-top: 16px;
+    border-top: 1px solid var(--light-gray);
+  }
+
+  .etag {
+    font-size: 0.68rem; font-weight: 500;
+    padding: 4px 12px; border-radius: 2px;
+    background: var(--off-white);
+    border: 1px solid var(--border-light);
+    color: var(--gu-gray);
+  }
+
+  /* ── VIDEO ── */
+  .video-section {
+    background: var(--white);
+    padding: 80px 40px;
+  }
+
+  .video-inner {
+    max-width: 860px; margin: 0 auto;
+    text-align: center;
+  }
+
+  .video-inner .heading { margin-bottom: 32px; }
+
+  .video-embed {
+    position: relative; padding-bottom: 56.25%; height: 0;
+    border-radius: 3px; overflow: hidden;
+    background: var(--gu-blue);
+    border: 1px solid var(--border-light);
+  }
+
+  .video-embed iframe {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; border: none;
+  }
+
+  .video-placeholder {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 12px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .play-btn {
+    width: 60px; height: 60px;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 1.3rem; color: rgba(255,255,255,0.5);
+  }
+
+  .video-placeholder span {
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+
+  /* ── MISSION ── */
+  .mission {
+    background: var(--gu-blue);
+    padding: 60px 40px;
+    text-align: center;
+  }
+
+  .mission p {
+    max-width: 780px; margin: 0 auto;
+    font-family: var(--caslon);
+    font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+    font-weight: 400; font-style: italic;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* ── SEASON ── */
+  .season {
+    padding: 80px 40px;
+    max-width: 960px; margin: 0 auto;
+  }
+
+  .season-header { margin-bottom: 36px; }
+
+  .concert-row {
+    display: grid; grid-template-columns: 90px 1fr auto;
+    gap: 24px; align-items: center;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--light-gray);
+  }
+
+  .concert-row:first-of-type { border-top: 1px solid var(--light-gray); }
+
+  .concert-date {
+    font-family: var(--caslon);
+    font-size: 1rem; font-weight: 400;
+    color: var(--gu-blue);
+  }
+
+  .concert-date small {
+    display: block; font-family: var(--sans);
+    font-size: 0.68rem; font-weight: 400;
+    color: var(--gu-gray); margin-top: 1px;
+  }
+
+  .concert-info h3 {
+    font-family: var(--caslon);
+    font-size: 1.1rem; font-weight: 400;
+    color: var(--text-primary); margin-bottom: 2px;
+  }
+
+  .concert-info p {
+    font-size: 0.82rem; color: var(--text-light);
+  }
+
+  .concert-badge {
+    display: inline-block; margin-top: 4px;
+    font-size: 0.62rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 2px;
+    background: var(--off-white);
+    border: 1px solid var(--border-light);
+    color: var(--gu-gray);
+  }
+
+  .concert-action .btn { padding: 8px 20px; font-size: 0.78rem; }
+
+  /* ── GALLERY ── */
+  .gallery {
+    display: grid; grid-template-columns: repeat(6, 1fr);
+    gap: 3px; background: var(--white); padding: 3px;
+  }
+
+  .gallery-item {
+    aspect-ratio: 1;
+    background: var(--light-gray);
+    position: relative; overflow: hidden;
+    cursor: pointer; transition: opacity 0.3s;
+  }
+
+  .gallery-item:hover { opacity: 0.8; }
+
+  .gallery-item .g-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 8px 10px;
+    background: linear-gradient(transparent, rgba(4,30,66,0.7));
+    font-size: 0.65rem; color: rgba(255,255,255,0.8);
+    font-weight: 500;
+  }
+
+  .gallery-item .g-placeholder {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    color: var(--gu-cool-gray); font-size: 0.65rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+
+  /* ── DONATE ── */
+  .donate-section {
+    background: var(--off-white);
+    border-top: 1px solid var(--border-light);
+    padding: 80px 40px;
+    text-align: center;
+  }
+
+  .donate-section .heading { margin-bottom: 12px; }
+
+  .donate-desc {
+    font-size: 0.95rem; color: var(--text-secondary);
+    max-width: 560px; margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+
+  .donate-tiers {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px; max-width: 720px; margin: 0 auto 36px;
+  }
+
+  .tier {
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: 3px; padding: 32px 20px;
+    text-align: center; transition: all 0.25s;
+    cursor: pointer;
+  }
+
+  .tier:hover, .tier.featured {
+    border-color: var(--gu-blue);
+    box-shadow: 0 4px 20px rgba(4,30,66,0.08);
+    transform: translateY(-2px);
+  }
+
+  .tier-amount {
+    font-family: var(--caslon);
+    font-size: 2rem; font-weight: 700;
+    color: var(--gu-blue);
+    margin-bottom: 4px;
+  }
+
+  .tier-name {
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gu-gray); margin-bottom: 10px;
+  }
+
+  .tier-desc {
+    font-size: 0.82rem; color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  .donate-btn-wrap .btn {
+    font-size: 0.88rem; padding: 14px 44px;
+  }
+
+  .donate-note {
+    margin-top: 16px; font-size: 0.78rem;
+    color: var(--text-light);
+  }
+
+  .donate-note a { color: var(--gu-blue-secondary); }
+
+  /* ── MAILING ── */
+  .mailing {
+    background: var(--gu-warm-gray);
+    padding: 52px 40px; text-align: center;
+  }
+
+  .mailing h2 {
+    font-family: var(--caslon);
+    font-size: 1.6rem; font-weight: 400;
+    color: var(--gu-blue); margin-bottom: 6px;
+  }
+
+  .mailing p {
+    font-size: 0.88rem; color: var(--text-secondary);
+    margin-bottom: 24px;
+  }
+
+  .mail-form {
+    display: flex; gap: 0;
+    max-width: 440px; margin: 0 auto;
+  }
+
+  .mail-form input {
+    flex: 1; padding: 12px 16px;
+    border: 1px solid var(--border-light);
+    font-family: var(--sans); font-size: 0.88rem;
+    background: var(--white);
+    border-radius: 2px 0 0 2px; outline: none;
+  }
+
+  .mail-form input:focus { border-color: var(--gu-blue-secondary); }
+  .mail-form input::placeholder { color: var(--gu-cool-gray); }
+
+  .mail-form button {
+    padding: 12px 24px;
+    background: var(--gu-blue); color: var(--white);
+    border: none; font-family: var(--sans);
+    font-size: 0.82rem; font-weight: 500;
+    border-radius: 0 2px 2px 0; cursor: pointer;
+    transition: background 0.25s;
+  }
+
+  .mail-form button:hover { background: var(--gu-blue-secondary); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--gu-blue);
+    padding: 56px 40px 32px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .footer-inner {
+    max-width: 960px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
+
+  .footer-brand .footer-logo {
+    font-family: var(--caslon);
+    font-size: 1.05rem; font-weight: 400;
+    color: var(--white); margin-bottom: 14px;
+  }
+
+  .footer-brand p { font-size: 0.82rem; line-height: 1.7; }
+
+  .footer-col h5 {
+    font-family: var(--sans);
+    font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 14px;
+  }
+
+  .footer-col a {
+    display: block; color: rgba(255,255,255,0.45);
+    text-decoration: none; font-size: 0.82rem;
+    margin-bottom: 9px; transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--white); }
+
+  .footer-bottom {
+    max-width: 960px; margin: 32px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.72rem;
+  }
+
+  .social-links { display: flex; gap: 18px; }
+  .social-links a { color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
+  .social-links a:hover { color: var(--white); }
+
+  /* ── REVEALS ── */
+  .reveal {
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .welcome { grid-template-columns: 1fr; text-align: center; gap: 32px; }
+    .welcome-photo { justify-self: center; }
+    .welcome-sig { text-align: center; }
+    .ensembles-grid { grid-template-columns: 1fr; }
+    .concert-row { grid-template-columns: 80px 1fr; }
+    .concert-action { display: none; }
+    .gallery { grid-template-columns: repeat(3, 1fr); }
+    .donate-tiers { grid-template-columns: 1fr; max-width: 280px; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .nav-inner { padding: 0 24px; }
+    .section-pad { padding-left: 24px; padding-right: 24px; }
+  }
+
+  @media (max-width: 600px) {
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+    .footer-inner { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .mail-form { flex-direction: column; }
+    .mail-form input, .mail-form button { border-radius: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <span class="gu-mark">GU</span>
+      Georgetown University Choir
+    </a>
+    <div class="nav-links">
+      <div class="nav-item has-dropdown">
+        <a href="#">About Us</a>
+        <div class="dropdown">
+          <a href="#">Our Story</a>
+          <a href="#">Artistic Leadership</a>
+          <a href="#ensembles">Our Ensembles</a>
+          <a href="#">Performance Videos</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="#season">Our Season</a>
+      </div>
+      <div class="nav-item has-dropdown">
+        <a href="#">Sing With Us</a>
+        <div class="dropdown">
+          <a href="#">Audition Information</a>
+          <a href="#">Rehearsal Schedule</a>
+          <a href="#">Our Singers</a>
+        </div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <a href="#donate" class="nav-donate-btn">Donate</a>
+        <div class="dropdown">
+          <a href="#">Make a Gift</a>
+          <a href="#">Causes We Support</a>
+          <a href="#">Sponsor a Concert</a>
+        </div>
+      </div>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <span class="mobile-section">About Us</span>
+  <a href="#">Our Story</a>
+  <a href="#">Artistic Leadership</a>
+  <a href="#ensembles">Our Ensembles</a>
+  <a href="#">Performance Videos</a>
+  <span class="mobile-section">Our Season</span>
+  <a href="#season">Concerts &amp; Events</a>
+  <span class="mobile-section">Sing With Us</span>
+  <a href="#">Audition Information</a>
+  <a href="#">Rehearsal Schedule</a>
+  <a href="#">Our Singers</a>
+  <span class="mobile-section">Support</span>
+  <a href="#donate">Donate</a>
+  <a href="#">Causes We Support</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-crest">GU</div>
+    <div class="hero-university">Georgetown University</div>
+    <h1>The Georgetown<br>University Choir</h1>
+    <div class="hero-sub">Concert Choir &amp; Chamber Singers</div>
+    <div class="hero-dept">Department of Performing Arts</div>
+    <div class="hero-buttons">
+      <a href="#season" class="btn btn-white">Our Season</a>
+      <a href="#" class="btn btn-ghost">Sing With Us</a>
+    </div>
+  </div>
+</section>
+
+<div class="accent-bar"></div>
+
+<!-- WELCOME -->
+<section class="welcome">
+  <div class="welcome-photo reveal">
+    <div class="placeholder">
+      <span>Director</span>
+      <span style="font-size:0.6rem;opacity:0.5;margin-top:2px">Photo</span>
+    </div>
+  </div>
+  <div class="welcome-body reveal">
+    <div class="greeting">Welcome to the Hilltop.</div>
+    <p>
+      The Georgetown University Choir — comprising our Concert Choir and Chamber
+      Singers — represents the choral tradition at one of the nation's oldest
+      Catholic and Jesuit universities. We are proud of the vibrant musical
+      community we have built and invite you to explore the talented singers,
+      ambitious repertoire, and collaborative spirit that define our program.
+    </p>
+    <p>
+      Whether performing large-scale orchestral works, intimate a cappella
+      masterpieces, or commissioning new compositions, our ensembles embody
+      Georgetown's enduring commitment to the arts and to the
+      transformative power of singing together.
+    </p>
+    <div class="welcome-sig">
+      <div class="name">[Director's Name]</div>
+      <div class="title">Artistic Director, Georgetown University Choir</div>
+    </div>
+  </div>
+</section>
+
+<!-- ENSEMBLES -->
+<section class="ensembles" id="ensembles">
+  <div class="ensembles-inner">
+    <div class="ensembles-header">
+      <div class="label reveal">Our Ensembles</div>
+      <h2 class="heading reveal">Two Voices, One Program</h2>
+    </div>
+
+    <div class="ensembles-grid">
+      <div class="ensemble-card reveal">
+        <div class="card-label">SATB Choral Ensemble</div>
+        <h3>Concert Choir</h3>
+        <p>
+          The Concert Choir is a large SATB ensemble performing sacred and secular
+          works from all periods of music history. The Choir presents one major
+          concert each semester, frequently collaborating with the Georgetown
+          University Orchestra and guest artists. Open by audition to students,
+          faculty, staff, and members of the University community. The Choir hosts
+          the annual Messiah Sing-Along each December.
+        </p>
+        <div class="ensemble-tags">
+          <span class="etag">Orchestral</span>
+          <span class="etag">Messiah Sing-Along</span>
+          <span class="etag">Commissions</span>
+        </div>
+      </div>
+
+      <div class="ensemble-card reveal">
+        <div class="card-label">Founded 1992 &middot; Select Voices</div>
+        <h3>Chamber Singers</h3>
+        <p>
+          The Chamber Singers is a select group of mixed voices performing small
+          choral masterworks from the Renaissance through the twenty-first century.
+          Emphasis is placed on the art of a cappella singing, with repertoire
+          spanning Josquin, Palestrina, Byrd, Poulenc, and living composers.
+          The ensemble performs on campus, at venues across Washington, and on tour.
+        </p>
+        <div class="ensemble-tags">
+          <span class="etag">A Cappella</span>
+          <span class="etag">Renaissance–Modern</span>
+          <span class="etag">Touring</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="video-section">
+  <div class="video-inner">
+    <div class="label reveal">Watch &amp; Listen</div>
+    <h2 class="heading reveal">Hear Us in Performance</h2>
+    <div class="video-embed reveal">
+      <!-- Replace with your YouTube/Vimeo iframe -->
+      <div class="video-placeholder">
+        <div class="play-btn">&#9654;</div>
+        <span>Embed your video here</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<div class="mission">
+  <p class="reveal">
+    The Georgetown University Choir celebrates the joy of singing, cultivates musical
+    excellence, and fosters community through the transformative power of choral music
+    on the Hilltop and beyond.
+  </p>
+</div>
+
+<!-- SEASON -->
+<section class="season" id="season">
+  <div class="season-header">
+    <div class="label reveal">Our Season</div>
+    <h2 class="heading reveal">Upcoming Performances</h2>
+  </div>
+
+  <div class="concert-row reveal">
+    <div class="concert-date">Sep 28<small>2026</small></div>
+    <div class="concert-info">
+      <h3>Fall Welcome Concert</h3>
+      <p>Gaston Hall, Georgetown University &middot; 7:30 PM</p>
+      <span class="concert-badge">Concert Choir &amp; Chamber Singers</span>
+    </div>
+    <div class="concert-action"><a href="#" class="btn btn-blue-outline">Details</a></div>
+  </div>
+
+  <div class="concert-row reveal">
+    <div class="concert-date">Nov 15<small>2026</small></div>
+    <div class="concert-info">
+      <h3>Choral Masterworks with Orchestra</h3>
+      <p>Dahlgren Chapel &middot; 8:00 PM</p>
+      <span class="concert-badge">Concert Choir &amp; Orchestra</span>
+    </div>
+    <div class="concert-action"><a href="#" class="btn btn-blue-outline">Details</a></div>
+  </div>
+
+  <div class="concert-row reveal">
+    <div class="concert-date">Nov 22<small>2026</small></div>
+    <div class="concert-info">
+      <h3>Renaissance by Candlelight</h3>
+      <p>Dahlgren Chapel &middot; 7:00 PM</p>
+      <span class="concert-badge">Chamber Singers</span>
+    </div>
+    <div class="concert-action"><a href="#" class="btn btn-blue-outline">Details</a></div>
+  </div>
+
+  <div class="concert-row reveal">
+    <div class="concert-date">Dec 7<small>2026</small></div>
+    <div class="concert-info">
+      <h3>Messiah Sing-Along</h3>
+      <p>Gaston Hall &middot; 7:30 PM</p>
+      <span class="concert-badge">Concert Choir &amp; Orchestra</span>
+    </div>
+    <div class="concert-action"><a href="#" class="btn btn-blue-outline">Details</a></div>
+  </div>
+
+  <div class="concert-row reveal">
+    <div class="concert-date">Mar 20<small>2027</small></div>
+    <div class="concert-info">
+      <h3>Spring Tour</h3>
+      <p>New York &middot; Philadelphia &middot; Boston</p>
+      <span class="concert-badge">Chamber Singers</span>
+    </div>
+    <div class="concert-action"><a href="#" class="btn btn-blue-outline">Details</a></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div class="gallery">
+  <div class="gallery-item"><div class="g-placeholder">Photo</div><div class="g-label">Concert Choir</div></div>
+  <div class="gallery-item"><div class="g-placeholder">Photo</div><div class="g-label">Chamber Singers</div></div>
+  <div class="gallery-item"><div class="g-placeholder">Photo</div><div class="g-label">Gaston Hall</div></div>
+  <div class="gallery-item"><div class="g-placeholder">Photo</div><div class="g-label">With Orchestra</div></div>
+  <div class="gallery-item"><div class="g-placeholder">Photo</div><div class="g-label">On Tour</div></div>
+  <div class="gallery-item"><div class="g-placeholder">Photo</div><div class="g-label">Dahlgren Chapel</div></div>
+</div>
+
+<!-- DONATE -->
+<section class="donate-section" id="donate">
+  <div class="label reveal">Support Us</div>
+  <h2 class="heading reveal">Help Us Keep Singing</h2>
+  <p class="donate-desc reveal">
+    Your generosity funds sheet music, tour travel, guest artists, orchestral
+    collaborations, and outreach programs that extend choral music to our
+    wider community.
+  </p>
+
+  <div class="donate-tiers reveal">
+    <div class="tier">
+      <div class="tier-amount">$25</div>
+      <div class="tier-name">Friend</div>
+      <div class="tier-desc">Sheet music for one singer for a semester</div>
+    </div>
+    <div class="tier featured">
+      <div class="tier-amount">$100</div>
+      <div class="tier-name">Patron</div>
+      <div class="tier-desc">Guest artist masterclass</div>
+    </div>
+    <div class="tier">
+      <div class="tier-amount">$500</div>
+      <div class="tier-name">Benefactor</div>
+      <div class="tier-desc">Annual tour travel fund</div>
+    </div>
+  </div>
+
+  <div class="donate-btn-wrap reveal">
+    <a href="#" class="btn btn-blue">Make a Gift</a>
+  </div>
+  <div class="donate-note reveal">
+    All donations are tax-deductible. <a href="#">Learn more about giving</a>.
+  </div>
+</section>
+
+<!-- MAILING -->
+<div class="mailing">
+  <h2>Stay Connected</h2>
+  <p>Concert announcements and news from the Hilltop.</p>
+  <div class="mail-form">
+    <input type="email" placeholder="Your email address">
+    <button>Subscribe</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">Georgetown University Choir</div>
+      <p>Department of Performing Arts<br>Georgetown University<br>37th &amp; O Streets NW<br>Washington, DC 20057</p>
+    </div>
+    <div class="footer-col">
+      <h5>About</h5>
+      <a href="#">Our Story</a>
+      <a href="#">Leadership</a>
+      <a href="#">Concert Choir</a>
+      <a href="#">Chamber Singers</a>
+    </div>
+    <div class="footer-col">
+      <h5>Join</h5>
+      <a href="#">Auditions</a>
+      <a href="#">Rehearsals</a>
+      <a href="#">Tour</a>
+      <a href="#">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h5>Connect</h5>
+      <a href="#">Email Us</a>
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Facebook</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Georgetown University Choir</span>
+    <div class="social-links">
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Facebook</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

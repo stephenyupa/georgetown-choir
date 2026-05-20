@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Georgetown University Choir — Concert Choir &amp; Chamber Singers</title>
+<meta name="description" content="Home of the Georgetown University Concert Choir and Chamber Singers, Department of Performing Arts at Georgetown University.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ════════════════════════════════════════════════
+     GEORGETOWN UNIVERSITY VISUAL IDENTITY
+     Primary:   Georgetown Blue  #041E42  (PMS 282)
+     Primary:   Georgetown Gray  #63666A  (Cool Gray 10)
+     Typeface:  Adobe Caslon → Libre Caslon Text (web)
+     Secondary: Neue Helvetica → Source Sans 3 (web)
+     ════════════════════════════════════════════════ */
+  :root {
+    --gu-blue: #041E42;
+    --gu-blue-sec: #003DA5;
+    --gu-gray: #63666A;
+    --gu-gray-lt: #A7A8AA;
+    --gu-gray-xlt: #D1D3D4;
+    --white: #FFFFFF;
+    --off-white: #F7F7F6;
+    --light-gray: #EDEDEB;
+    --text-pri: #1C1C1C;
+    --text-sec: #3D3D3D;
+    --text-lt: #63666A;
+    --border: #DDDBD7;
+    --caslon: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
+    --sans: 'Source Sans 3', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); color: var(--text-pri); background: var(--white); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+  /* ── NAVIGATION ── */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--gu-blue); }
+  .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 64px; }
+  .nav-logo { font-family: var(--caslon); font-size: 0.95rem; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 12px; }
+  .nav-seal { height: 34px; width: auto; }
+  .nav-links { display: flex; gap: 0; align-items: center; height: 100%; }
+  .ni { position: relative; height: 100%; display: flex; align-items: center; }
+  .ni > a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.82rem; font-weight: 400; padding: 0 16px; height: 100%; display: flex; align-items: center; transition: color 0.2s, background 0.2s; }
+  .ni > a:hover { color: var(--white); background: rgba(255,255,255,0.07); }
+  .ni.hd > a::after { content: ''; margin-left: 6px; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 4px solid rgba(255,255,255,0.35); }
+  .dd { position: absolute; top: 100%; left: 0; background: var(--white); min-width: 240px; opacity: 0; visibility: hidden; transform: translateY(-2px); transition: all 0.2s; box-shadow: 0 8px 32px rgba(4,30,66,0.15); border-top: 3px solid var(--gu-blue-sec); }
+  .ni:hover .dd { opacity: 1; visibility: visible; transform: translateY(0); }
+  .dd a { display: block; padding: 12px 20px; color: var(--text-sec); text-decoration: none; font-size: 0.85rem; border-bottom: 1px solid var(--light-gray); transition: all 0.15s; }
+  .dd a:last-child { border-bottom: none; }
+  .dd a:hover { color: var(--gu-blue-sec); background: var(--off-white); padding-left: 24px; }
+  .nav-don { background: var(--white) !important; color: var(--gu-blue) !important; font-weight: 600 !important; padding: 0 20px !important; margin-left: 10px; font-size: 0.8rem !important; border-radius: 2px; height: 36px !important; }
+  .nav-don:hover { background: var(--gu-gray-xlt) !important; }
+  .ham { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: none; border: none; padding: 8px; }
+  .ham span { display: block; width: 20px; height: 1.5px; background: rgba(255,255,255,0.85); }
+  .mm { display: none; position: fixed; top: 64px; left: 0; right: 0; bottom: 0; background: var(--white); padding: 0; overflow-y: auto; z-index: 999; }
+  .mm.open { display: block; }
+  .mm a { display: block; color: var(--text-sec); text-decoration: none; padding: 16px 24px; font-size: 0.95rem; border-bottom: 1px solid var(--light-gray); }
+  .mm a:hover { color: var(--gu-blue-sec); background: var(--off-white); }
+  .mm .ms { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gu-gray); padding: 20px 24px 8px; border-bottom: none; }
+
+  /* ── HERO ── */
+  .hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--gu-blue); overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(0,61,165,0.08) 0%, transparent 60%), linear-gradient(180deg, #041E42 0%, #05264F 100%); }
+  .hero-lines { position: absolute; inset: 0; opacity: 0.015; background-image: repeating-linear-gradient(0deg, transparent, transparent 100px, rgba(255,255,255,0.25) 100px, rgba(255,255,255,0.25) 101px), repeating-linear-gradient(90deg, transparent, transparent 100px, rgba(255,255,255,0.25) 100px, rgba(255,255,255,0.25) 101px); }
+  .hero-c { position: relative; z-index: 2; text-align: center; padding: 0 32px; animation: fu 0.8s ease-out; }
+  @keyframes fu { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-seal-wrap { width: 88px; height: 103px; margin: 0 auto 28px; }
+  .hero-seal-wrap img { width: 100%; height: auto; filter: brightness(0) invert(1); opacity: 0.5; }
+  .hero-u { font-family: var(--sans); font-size: 0.76rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+  .hero h1 { font-family: var(--caslon); font-size: clamp(2.2rem, 5.5vw, 3.8rem); font-weight: 400; line-height: 1.15; color: var(--white); margin-bottom: 14px; }
+  .hero-sub { font-family: var(--caslon); font-size: clamp(1rem, 2vw, 1.25rem); font-style: italic; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+  .hero-dept { font-size: 0.82rem; font-weight: 300; color: rgba(255,255,255,0.28); margin-bottom: 40px; }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn { display: inline-block; padding: 12px 28px; font-family: var(--sans); font-size: 0.82rem; font-weight: 500; text-decoration: none; border-radius: 2px; transition: all 0.25s; cursor: pointer; border: none; }
+  .btn-w { background: var(--white); color: var(--gu-blue); }
+  .btn-w:hover { background: var(--gu-gray-xlt); }
+  .btn-gh { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.3); }
+  .btn-gh:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); }
+  .btn-blue { background: var(--gu-blue); color: var(--white); }
+  .btn-blue:hover { background: var(--gu-blue-sec); }
+  .btn-blue-o { background: transparent; color: var(--gu-blue); border: 1.5px solid var(--gu-blue); }
+  .btn-blue-o:hover { background: var(--gu-blue); color: var(--white); }
+  .accent-bar { height: 4px; background: linear-gradient(90deg, var(--gu-blue) 0%, var(--gu-blue-sec) 50%, var(--gu-gray) 100%); }
+
+  /* ── AUDITION CALLOUT ── */
+  .aud { background: var(--gu-blue-sec); }
+  .aud-inner { max-width: 960px; margin: 0 auto; padding: 40px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+  .aud h2 { font-family: var(--caslon); font-size: 1.45rem; color: var(--white); margin-bottom: 8px; }
+  .aud p { font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.65; }
+  .aud p strong { color: var(--white); font-weight: 600; }
+  .aud-btn { background: var(--white); color: var(--gu-blue-sec); font-weight: 600; padding: 14px 32px; font-size: 0.85rem; white-space: nowrap; border-radius: 2px; text-decoration: none; display: inline-block; transition: background 0.25s; }
+  .aud-btn:hover { background: var(--gu-gray-xlt); }
+  .aud-steps { margin-top: 14px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .aud-step { background: rgba(255,255,255,0.1); border-radius: 3px; padding: 10px 16px; font-size: 0.78rem; color: rgba(255,255,255,0.85); }
+  .aud-step strong { display: block; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 2px; }
+
+  /* ── DIRECTOR WELCOME ── */
+  .welcome { display: grid; grid-template-columns: 220px 1fr; gap: 56px; align-items: start; max-width: 920px; margin: 0 auto; padding: 80px 40px; }
+  .w-photo { width: 200px; border-radius: 3px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 4px 16px rgba(4,30,66,0.08); }
+  .w-photo img { width: 100%; height: auto; display: block; }
+  .w-body { padding-top: 4px; }
+  .w-body .greeting { font-family: var(--caslon); font-size: 1.45rem; color: var(--gu-blue); margin-bottom: 20px; }
+  .w-body p { font-size: 0.95rem; line-height: 1.8; color: var(--text-sec); margin-bottom: 14px; }
+  .w-sig { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .w-sig .name { font-family: var(--caslon); font-size: 1.05rem; font-weight: 700; color: var(--gu-blue); }
+  .w-sig .ttl { font-size: 0.82rem; color: var(--gu-gray); margin-top: 2px; line-height: 1.5; }
+  .w-sig .contact { margin-top: 8px; font-size: 0.82rem; color: var(--text-lt); line-height: 1.5; }
+  .w-sig .contact a { color: var(--gu-blue-sec); text-decoration: none; }
+  .w-sig .contact a:hover { text-decoration: underline; }
+
+  /* ── ENSEMBLES ── */
+  .ens { background: var(--off-white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 40px; }
+  .ens-inner { max-width: 1040px; margin: 0 auto; }
+  .ens-hdr { text-align: center; margin-bottom: 48px; }
+  .label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gu-gray); margin-bottom: 10px; }
+  .heading { font-family: var(--caslon); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; color: var(--gu-blue); }
+  .ens-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .ec { background: var(--white); border: 1px solid var(--border); border-radius: 3px; overflow: hidden; transition: box-shadow 0.3s; }
+  .ec:hover { box-shadow: 0 8px 32px rgba(4,30,66,0.06); }
+  .ec-img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; }
+  .ec-body { padding: 28px 32px 32px; }
+  .ec-body .cl { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gu-blue-sec); margin-bottom: 8px; }
+  .ec-body h3 { font-family: var(--caslon); font-size: 1.35rem; color: var(--gu-blue); margin-bottom: 14px; }
+  .ec-body p { font-size: 0.9rem; line-height: 1.75; color: var(--text-sec); }
+  .ec-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--light-gray); }
+  .etag { font-size: 0.66rem; font-weight: 500; padding: 4px 12px; border-radius: 2px; background: var(--off-white); border: 1px solid var(--border); color: var(--gu-gray); }
+
+  /* ── VIDEO ── */
+  .vid-sec { background: var(--white); padding: 80px 40px; }
+  .vid-inner { max-width: 860px; margin: 0 auto; text-align: center; }
+  .vid-inner .heading { margin-bottom: 32px; }
+  .vid-wrap { border-radius: 3px; overflow: hidden; background: #000; border: 1px solid var(--border); box-shadow: 0 8px 40px rgba(4,30,66,0.1); }
+  .vid-wrap video { width: 100%; display: block; }
+
+  /* ── MISSION ── */
+  .mission { background: var(--gu-blue); padding: 60px 40px; text-align: center; }
+  .mission p { max-width: 780px; margin: 0 auto; font-family: var(--caslon); font-size: clamp(1.05rem, 2.2vw, 1.35rem); font-style: italic; line-height: 1.8; color: rgba(255,255,255,0.7); }
+
+  /* ── GALLERY ── */
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; background: var(--white); padding: 3px; }
+  .gi { aspect-ratio: 4/3; position: relative; overflow: hidden; }
+  .gi img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+  .gi:hover img { transform: scale(1.04); }
+  .gi .gl { position: absolute; bottom: 0; left: 0; right: 0; padding: 10px 14px; background: linear-gradient(transparent, rgba(4,30,66,0.75)); font-size: 0.72rem; color: rgba(255,255,255,0.9); font-weight: 500; }
+
+  /* ── DONATE ── */
+  .don { background: var(--off-white); border-top: 1px solid var(--border); padding: 80px 40px; text-align: center; }
+  .don .heading { margin-bottom: 12px; }
+  .don-desc { font-size: 0.95rem; color: var(--text-sec); max-width: 560px; margin: 0 auto 40px; line-height: 1.7; }
+  .don-tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 720px; margin: 0 auto 36px; }
+  .tier { background: var(--white); border: 1px solid var(--border); border-radius: 3px; padding: 32px 20px; transition: all 0.25s; cursor: pointer; }
+  .tier:hover, .tier.ft { border-color: var(--gu-blue); box-shadow: 0 4px 20px rgba(4,30,66,0.08); transform: translateY(-2px); }
+  .ta { font-family: var(--caslon); font-size: 2rem; font-weight: 700; color: var(--gu-blue); margin-bottom: 4px; }
+  .tn { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gu-gray); margin-bottom: 10px; }
+  .td { font-size: 0.82rem; color: var(--text-lt); line-height: 1.5; }
+  .don-btn .btn { font-size: 0.88rem; padding: 14px 44px; }
+  .don-note { margin-top: 16px; font-size: 0.78rem; color: var(--text-lt); }
+  .don-note a { color: var(--gu-blue-sec); }
+
+  /* ── MAILING ── */
+  .mail { background: var(--gu-gray-xlt); padding: 52px 40px; text-align: center; }
+  .mail h2 { font-family: var(--caslon); font-size: 1.6rem; color: var(--gu-blue); margin-bottom: 6px; }
+  .mail p { font-size: 0.88rem; color: var(--text-sec); margin-bottom: 24px; }
+  .mf { display: flex; gap: 0; max-width: 440px; margin: 0 auto; }
+  .mf input { flex: 1; padding: 12px 16px; border: 1px solid var(--border); font-family: var(--sans); font-size: 0.88rem; background: var(--white); border-radius: 2px 0 0 2px; outline: none; }
+  .mf input:focus { border-color: var(--gu-blue-sec); }
+  .mf input::placeholder { color: var(--gu-gray-lt); }
+  .mf button { padding: 12px 24px; background: var(--gu-blue); color: var(--white); border: none; font-family: var(--sans); font-size: 0.82rem; font-weight: 500; border-radius: 0 2px 2px 0; cursor: pointer; transition: background 0.25s; }
+  .mf button:hover { background: var(--gu-blue-sec); }
+
+  /* ── FOOTER ── */
+  footer { background: var(--gu-blue); padding: 56px 40px 32px; color: rgba(255,255,255,0.5); }
+  .ft-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; }
+  .ft-brand .ft-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .ft-brand .ft-logo img { height: 40px; width: auto; filter: brightness(0) invert(1); opacity: 0.4; }
+  .ft-brand .ft-logo span { font-family: var(--caslon); font-size: 1.05rem; color: var(--white); }
+  .ft-brand p { font-size: 0.82rem; line-height: 1.7; }
+  .ft-col h5 { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 14px; }
+  .ft-col a { display: block; color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.82rem; margin-bottom: 9px; transition: color 0.2s; }
+  .ft-col a:hover { color: var(--white); }
+  .ft-bottom { max-width: 960px; margin: 32px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; }
+  .soc { display: flex; gap: 18px; }
+  .soc a { color: rgba(255,255,255,0.35); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
+  .soc a:hover { color: var(--white); }
+  .ft-credit { max-width: 960px; margin: 16px auto 0; font-size: 0.68rem; color: rgba(255,255,255,0.2); text-align: center; }
+
+  /* ── REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; } .ham { display: flex; }
+    .welcome { grid-template-columns: 1fr; text-align: center; gap: 32px; } .w-photo { justify-self: center; }
+    .ens-grid { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+    .don-tiers { grid-template-columns: 1fr; max-width: 280px; }
+    .ft-inner { grid-template-columns: 1fr 1fr; }
+    .aud-inner { grid-template-columns: 1fr; text-align: center; }
+    .aud-steps { justify-content: center; }
+    .nav-inner { padding: 0 20px; }
+  }
+  @media (max-width: 600px) {
+    .gallery { grid-template-columns: 1fr; }
+    .ft-inner { grid-template-columns: 1fr; }
+    .ft-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .mf { flex-direction: column; } .mf input, .mf button { border-radius: 2px; }
+    .welcome { padding: 48px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img class="nav-seal" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Georgetown_University_seal.svg/200px-Georgetown_University_seal.svg.png" alt="Georgetown University Seal" style="filter:brightness(0) invert(1);opacity:0.85">
+      Georgetown University Choir
+    </a>
+    <div class="nav-links">
+      <div class="ni hd"><a href="#">About Us</a><div class="dd"><a href="#">Our Story</a><a href="#">Artistic Leadership</a><a href="#ensembles">Our Ensembles</a></div></div>
+      <div class="ni hd"><a href="#">Sing With Us</a><div class="dd"><a href="#auditions">Audition Information</a><a href="#">Rehearsal Schedule</a><a href="#">Our Singers</a></div></div>
+      <div class="ni hd"><a href="#donate" class="nav-don">Donate</a><div class="dd"><a href="#">Make a Gift</a><a href="#">Causes We Support</a><a href="#">Sponsor a Concert</a></div></div>
+    </div>
+    <button class="ham" onclick="document.getElementById('mm').classList.toggle('open')"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mm" id="mm">
+  <span class="ms">About Us</span><a href="#">Our Story</a><a href="#">Artistic Leadership</a><a href="#ensembles">Our Ensembles</a>
+  <span class="ms">Sing With Us</span><a href="#auditions">Audition Information</a><a href="#">Rehearsal Schedule</a>
+  <span class="ms">Support</span><a href="#donate">Donate</a><a href="#">Causes We Support</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-c">
+    <div class="hero-seal-wrap">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Georgetown_University_seal.svg/200px-Georgetown_University_seal.svg.png" alt="Georgetown University Seal">
+    </div>
+    <div class="hero-u">Georgetown University</div>
+    <h1>The Georgetown<br>University Choir</h1>
+    <div class="hero-sub">Concert Choir &amp; Chamber Singers</div>
+    <div class="hero-dept">Department of Performing Arts &middot; College of Arts &amp; Sciences</div>
+    <div class="hero-btns">
+      <a href="#ensembles" class="btn btn-w">Our Ensembles</a>
+      <a href="#auditions" class="btn btn-gh">Sing With Us</a>
+    </div>
+  </div>
+</section>
+<div class="accent-bar"></div>
+
+<!-- ═══ AUDITION CALLOUT ═══ -->
+<section class="aud" id="auditions">
+  <div class="aud-inner">
+    <div>
+      <h2>Chamber Singers Auditions — Fall 2026</h2>
+      <p><strong>August 29 &amp; August 30, 2026</strong> — The Georgetown University Chamber Singers are holding auditions for the Fall 2026 semester. All Georgetown students are welcome to audition regardless of major or school. The audition piece is Thomas Tallis' <em>If ye love me</em> — sheet music will be provided in advance.</p>
+      <div class="aud-steps">
+        <div class="aud-step"><strong>Step 1</strong>Sign up for voice placement</div>
+        <div class="aud-step"><strong>Step 2</strong>Attend voice placement session</div>
+        <div class="aud-step"><strong>Step 3</strong>Audition on Aug 29 or 30</div>
+      </div>
+    </div>
+    <a href="#" class="btn aud-btn">Sign Up &rarr;</a>
+  </div>
+</section>
+
+<!-- ═══ DIRECTOR WELCOME ═══ -->
+<section class="welcome">
+  <div class="w-photo reveal">
+    <img src="binkholder.png" alt="Professor Frederick Binkholder, Director of Choral Studies at Georgetown University">
+  </div>
+  <div class="w-body reveal">
+    <div class="greeting">Welcome to the Hilltop.</div>
+    <p>
+      The Georgetown University Choir — comprising our Concert Choir and Chamber
+      Singers — represents the choral tradition at one of the nation's oldest
+      Catholic and Jesuit universities. We are proud of the vibrant musical
+      community we have built and invite you to explore the talented singers,
+      ambitious repertoire, and collaborative spirit that define our program.
+    </p>
+    <p>
+      Whether performing large-scale orchestral works, intimate a cappella
+      masterpieces, or commissioning new compositions, our ensembles embody
+      Georgetown's enduring commitment to the arts and to the
+      transformative power of singing together.
+    </p>
+    <div class="w-sig">
+      <div class="name">Prof. Frederick Binkholder</div>
+      <div class="ttl">Professor of the Practice &amp; Coordinator, Special Music Events<br>Director of Choral Studies, Department of Performing Arts</div>
+      <div class="contact">
+        <a href="mailto:fab7@georgetown.edu">fab7@georgetown.edu</a> &middot; (202) 294-9910<br>
+        New North Suite, Music &middot; Georgetown University
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ENSEMBLES ═══ -->
+<section class="ens" id="ensembles">
+  <div class="ens-inner">
+    <div class="ens-hdr">
+      <div class="label reveal">Our Ensembles</div>
+      <h2 class="heading reveal">Two Voices, One Program</h2>
+    </div>
+    <div class="ens-grid">
+      <div class="ec reveal">
+        <img class="ec-img" src="https://performingarts.georgetown.edu/wp-content/uploads/sites/483/2018/07/GUconcertchoir.jpg" alt="Georgetown University Concert Choir performing in Gaston Hall">
+        <div class="ec-body">
+          <div class="cl">SATB Choral Ensemble</div>
+          <h3>Concert Choir</h3>
+          <p>The Georgetown University Concert Choir is an SATB ensemble that performs sacred and secular works from all periods of music history. The Choir performs one major concert each semester, collaborating frequently with the Georgetown University Orchestra and guest artists. Open by audition to students, faculty, staff, and members of the University community. Host of the annual Messiah Sing-Along.</p>
+          <div class="ec-tags"><span class="etag">Orchestral</span><span class="etag">Messiah Sing-Along</span><span class="etag">Commissions</span></div>
+        </div>
+      </div>
+      <div class="ec reveal">
+        <img class="ec-img" src="https://performingarts.georgetown.edu/wp-content/uploads/sites/483/2018/07/GU_chambersingers.jpg" alt="Georgetown University Chamber Singers performing a cappella">
+        <div class="ec-body">
+          <div class="cl">Founded 1992 &middot; Select Voices</div>
+          <h3>Chamber Singers</h3>
+          <p>The Georgetown University Chamber Singers, founded in 1992, is a select group of mixed voices organized to perform small choral masterworks from the Renaissance through the twenty-first century. Emphasis is placed on the art of a cappella singing, with repertoire spanning Josquin, Palestrina, Byrd, Poulenc, and living composers. The ensemble performs on campus, at venues across Washington, and on tour.</p>
+          <div class="ec-tags"><span class="etag">A Cappella</span><span class="etag">Renaissance–Modern</span><span class="etag">Touring</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VIDEO ═══ -->
+<section class="vid-sec">
+  <div class="vid-inner">
+    <div class="label reveal">Watch &amp; Listen</div>
+    <h2 class="heading reveal">Hear Us in Performance</h2>
+    <div class="vid-wrap reveal">
+      <video controls preload="metadata" poster="">
+        <source src="sicut_cervus.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MISSION ═══ -->
+<div class="mission">
+  <p class="reveal">The Georgetown University Choir celebrates the joy of singing, cultivates musical excellence, and fosters community through the transformative power of choral music on the Hilltop and beyond.</p>
+</div>
+
+<!-- ═══ GALLERY ═══ -->
+<div class="gallery">
+  <div class="gi"><img src="https://performingarts.georgetown.edu/wp-content/uploads/sites/483/2018/07/GUconcertchoir.jpg" alt="Concert Choir"><div class="gl">Concert Choir</div></div>
+  <div class="gi"><img src="https://performingarts.georgetown.edu/wp-content/uploads/sites/483/2018/07/GU_chambersingers.jpg" alt="Chamber Singers"><div class="gl">Chamber Singers</div></div>
+  <div class="gi"><img src="https://performingarts.georgetown.edu/wp-content/uploads/sites/483/2018/07/messiah_sing_along1-1.jpg" alt="Messiah Sing-Along in Gaston Hall"><div class="gl">Messiah Sing-Along</div></div>
+</div>
+
+<!-- ═══ DONATE ═══ -->
+<section class="don" id="donate">
+  <div class="label reveal">Support Us</div>
+  <h2 class="heading reveal">Help Us Keep Singing</h2>
+  <p class="don-desc reveal">Your generosity funds sheet music, tour travel, guest artists, orchestral collaborations, and outreach programs that extend choral music to our wider community.</p>
+  <div class="don-tiers reveal">
+    <div class="tier"><div class="ta">$25</div><div class="tn">Friend</div><div class="td">Sheet music for one singer for a semester</div></div>
+    <div class="tier ft"><div class="ta">$100</div><div class="tn">Patron</div><div class="td">Guest artist masterclass</div></div>
+    <div class="tier"><div class="ta">$500</div><div class="tn">Benefactor</div><div class="td">Annual tour travel fund</div></div>
+  </div>
+  <div class="don-btn reveal"><a href="#" class="btn btn-blue">Make a Gift</a></div>
+  <div class="don-note reveal">All donations are tax-deductible. <a href="#">Learn more about giving</a>.</div>
+</section>
+
+<!-- ═══ MAILING LIST ═══ -->
+<div class="mail">
+  <h2>Stay Connected</h2>
+  <p>Concert announcements and news from the Hilltop.</p>
+  <div class="mf"><input type="email" placeholder="Your email address"><button>Subscribe</button></div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-brand">
+      <div class="ft-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Georgetown_University_seal.svg/200px-Georgetown_University_seal.svg.png" alt="Georgetown Seal">
+        <span>Georgetown University Choir</span>
+      </div>
+      <p>Department of Performing Arts<br>College of Arts &amp; Sciences<br>Georgetown University<br>37th &amp; O Streets NW<br>Washington, DC 20057</p>
+    </div>
+    <div class="ft-col"><h5>About</h5><a href="#">Our Story</a><a href="#">Leadership</a><a href="#">Concert Choir</a><a href="#">Chamber Singers</a></div>
+    <div class="ft-col"><h5>Join</h5><a href="#auditions">Auditions</a><a href="#">Rehearsals</a><a href="#">Tour</a><a href="#">FAQ</a></div>
+    <div class="ft-col"><h5>Connect</h5><a href="mailto:fab7@georgetown.edu">Email Us</a><a href="https://www.instagram.com/georgetownchoir/" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/GUConcertChoir/" target="_blank" rel="noopener">Facebook</a><a href="https://performingarts.georgetown.edu/participate/perform/music-ensembles/" target="_blank" rel="noopener">GU Performing Arts</a></div>
+  </div>
+  <div class="ft-bottom">
+    <span>&copy; 2026 Georgetown University Choir &middot; Department of Performing Arts</span>
+    <div class="soc">
+      <a href="https://www.instagram.com/georgetownchoir/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/GUConcertChoir/" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </div>
+  <div class="ft-credit">Built by Stephen Yupa, Co-President &middot; Georgetown College of Arts &amp; Sciences '27</div>
+</footer>
+
+<script>
+  const o = new IntersectionObserver(e => {
+    e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); o.unobserve(x.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => o.observe(el));
+</script>
+</body>
+</html>
